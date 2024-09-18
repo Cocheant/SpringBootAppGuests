@@ -1,6 +1,7 @@
 package com.example.weddingApp.model;
 
 import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,6 +40,43 @@ public class Guest {
     private String music;
 
     // Getters and Setters
+
+    // Getter and Setter for guestName
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
+
+    // Getter and Setter for email
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Getter and Setter for rsvp
+    public RSVPStatus getRSVP() {
+        return rsvp;
+    }
+
+    public void setRSVP(RSVPStatus rsvp) {
+        this.rsvp = rsvp;
+    }
+
+    // Getter and Setter for foodRestrictions
+    public Set<FoodRestriction> getFoodRestrictions() {
+        return foodRestrictions;
+    }
+
+    public void setFoodRestrictions(Set<FoodRestriction> foodRestrictions) {
+        this.foodRestrictions = foodRestrictions;
+    }
+
     public Guest() {
         // default constructor
     }
