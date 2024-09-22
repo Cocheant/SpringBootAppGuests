@@ -25,6 +25,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable() // If you are using JWT, you might want to disable CSRF
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/login").permitAll() // Allow login without authentication
                         .requestMatchers("/admin/**").authenticated() // Protect admin routes
