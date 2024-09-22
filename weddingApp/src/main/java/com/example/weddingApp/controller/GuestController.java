@@ -39,7 +39,7 @@ public class GuestController {
 
         if (guest.isPresent()) {
             // Guest found, return their data to pre-fill the form
-            return ResponseEntity.ok("");
+            return ResponseEntity.ok("" + guest);
         } else {
             // Guest not found, return a message or 404 response
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
