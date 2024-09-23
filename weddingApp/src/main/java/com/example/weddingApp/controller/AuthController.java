@@ -36,7 +36,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @CrossOrigin(origins = "${api.url}", allowCredentials = "true")
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         try {
@@ -62,7 +62,7 @@ public class AuthController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @CrossOrigin(origins = "${api.url}", allowCredentials = "true")
     @GetMapping("/token")
     public ResponseEntity<?> getAdminPage(HttpServletRequest request) {
         // Check cookies for JWT
