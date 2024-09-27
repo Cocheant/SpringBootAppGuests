@@ -1,2 +1,2 @@
-Spring Boot app to manage Guest database recognition and updates from the frontend form. 
-This also allows the usage of the restricted admin pages with a real JWT Token Authentication (with cookies). 
+Spring Boot app to manage Guest database (update existing users) and updates from the frontend form. 
+This also allows the usage of the restricted admin page (an login page) with a JWT Token Authentication (with cookies). 
