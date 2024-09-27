@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+
+
+  springboot-app:
+    image: your-springboot-app
+    container_name: springboot-app
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/your_database
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-network
+
+networks:
+  springboot-network:
+    driver: bridge

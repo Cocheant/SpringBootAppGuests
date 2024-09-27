@@ -1,5 +1,7 @@
 package com.example.weddingApp.controller;
 
+import com.example.weddingApp.dto.GuestRequest;
+import com.example.weddingApp.dto.GuestResponse;
 import com.example.weddingApp.model.FoodRestriction;
 import com.example.weddingApp.model.Guest;
 import com.example.weddingApp.service.FoodRestrictionService;
@@ -27,23 +29,36 @@ public class GuestController {
     @Autowired
     private FoodRestrictionService foodRestrictionService;
 
+    @CrossOrigin(origins = "${api.url}")
     @PostMapping("/check")
-    public ResponseEntity<?> checkGuest(@RequestParam String guestName, @RequestParam String email) {
+    public ResponseEntity<?> checkGuest(@RequestBody GuestRequest guestRequest) {
 
+        String guestName = guestRequest.getGuestName();
+        String email = guestRequest.getEmail();
         if (!rateLimiter.tryAcquire()) {
+            GuestResponse response = new GuestResponse();
+            response.setStatus("Failure");
+            response.setMessage("Too many requests. Please try again later.");
+
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
-                    .body("Too many requests. Please try again later.");
+                    .body(response);
         }
 
         Optional<Guest> guest = guestService.findGuestByNameAndEmail(guestName, email);
 
         if (guest.isPresent()) {
+            GuestResponse response = new GuestResponse();
+            response.setStatus("success");
+            response.setMessage("Guest found");
             // Guest found, return their data to pre-fill the form
-            return ResponseEntity.ok("" + guest);
+            return ResponseEntity.ok(response);
         } else {
+            GuestResponse response = new GuestResponse();
+            response.setStatus("failure");
+            response.setMessage("Guest with the provided name and email does not exist.");
             // Guest not found, return a message or 404 response
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Guest with the provided name and email does not exist.");
+                    .body(response);
 
         }
     }
